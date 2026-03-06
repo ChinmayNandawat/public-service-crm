@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  email     String   @unique
+  phone     String
+  password  String
+  role      String   // citizen|officer|admin
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  officer   Officer?
+  complaints Complaint[] @relation("ComplaintCitizen")
+  auditLogs AuditLog[]
+  notifications Notification[] @relation("NotificationUser")
+
+  @@map("users")
+}
+
+model Ward {
+  id      Int      @id @default(autoincrement())
+  name    String
+  geojson Json?
+
+  // Relations
+  officers    Officer[]
+  complaints  Complaint[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("wards")
+}
+
+model Department {
+  id        Int      @id @default(autoincrement())
+  name      String
+  slaHours  Int      @default(24)
+
+  // Relations
+  officers    Officer[]
+  complaints  Complaint[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("departments")
+}
+
+model Officer {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @unique
+  wardId       Int
+  departmentId Int
+  workload     Int      @default(0)
+
+  // Relations
+  user        User       @relation(fields: [userId], references: [id])
+  ward        Ward       @relation(fields: [wardId], references: [id])
+  department  Department @relation(fields: [departmentId], references: [id])
+  complaints  Complaint[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("officers")
+}
+
+model Complaint {
+  id              Int       @id @default(autoincrement())
+  citizenId       Int
+  wardId          Int
+  departmentId    Int?
+  description     String
+  location        String?
+  latitude        Float?
+  longitude       Float?
+  category        String?
+  sentiment       String?
+  priorityScore   Float     @default(0)
+  status          String    @default("submitted")
+  assignedOfficer Int?
+  attachments     String?  // Store S3 file keys as comma-separated string
+  embedding       Float[]   // Store embedding vector for similarity search
+  createdAt       DateTime  @default(now())
+  assignedAt      DateTime?
+  resolvedAt      DateTime?
+
+  // Relations
+  citizen      User         @relation("ComplaintCitizen", fields: [citizenId], references: [id])
+  ward          Ward         @relation(fields: [wardId], references: [id])
+  department    Department?  @relation(fields: [departmentId], references: [id])
+  officer       Officer?     @relation(fields: [assignedOfficer], references: [id])
+  escalations   Escalation[]
+
+  @@map("complaints")
+}
+
+model Escalation {
+  id          Int       @id @default(autoincrement())
+  complaintId Int
+  escalatedAt DateTime  @default(now())
+  reason      String
+
+  // Relations
+  complaint Complaint @relation(fields: [complaintId], references: [id])
+
+  @@map("escalations")
+}
+
+model AuditLog {
+  id         Int       @id @default(autoincrement())
+  actorId    Int?
+  action     String
+  targetType String
+  targetId   Int?
+  metadata   Json?
+  createdAt  DateTime  @default(now())
+
+  // Relations
+  actor User? @relation(fields: [actorId], references: [id])
+
+  @@map("audit_logs")
+}
+
+model Notification {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  user      User      @relation("NotificationUser", fields: [userId], references: [id])
+  type      String
+  message   String
+  read      Boolean   @default(false)
+  createdAt DateTime @default(now())
+  
+  // Relations
+  @@map("notifications")
+}
