@@ -24,7 +24,7 @@ const Home = () => {
               Efficient, transparent, and structured public service management. Empowering citizens and officials to resolve community issues with uncompromising speed.
             </p>
             
-            <div className="pt-4 flex items-center gap-4">
+            <div className="pt-4 flex flex-col sm:flex-row items-baseline gap-4">
               <Link 
                 to="/submit-complaint" 
                 className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-all shadow-[0_0_20px_rgba(34,211,238,0.4)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)]"
@@ -33,6 +33,13 @@ const Home = () => {
                 <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
+              </Link>
+              <Link
+                to="/transparency"
+                className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-cyan-400 bg-slate-900 border border-cyan-400/30 hover:border-cyan-400 hover:bg-slate-800 rounded-lg transition-all"
+              >
+                <span>Transparency Portal</span>
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
               </Link>
             </div>
           </div>
