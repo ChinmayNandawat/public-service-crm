@@ -59,11 +59,16 @@ const Navbar = () => {
                 )}
                 
                 {user.role === 'admin' && (
-                  <Link to="/admin" className="text-slate-300 hover:text-white transition-colors px-3 py-2 rounded-md">
-                    Admin Dashboard
-                  </Link>
-                )}
-                
+                    <>
+                      <Link to="/admin" className="text-slate-300 hover:text-white transition-colors px-3 py-2 rounded-md">
+                        Admin Dashboard
+                      </Link>
+                      <Link to="/admin/complaints" className="text-slate-300 hover:text-white transition-colors px-3 py-2 rounded-md">
+                        Manage Complaints
+                      </Link>
+                    </>
+                  )}
+
                 {user.role === 'officer' && (
                   <Link to="/officer" className="text-slate-300 hover:text-white transition-colors px-3 py-2 rounded-md">
                     Officer Dashboard

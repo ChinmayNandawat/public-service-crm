@@ -12,6 +12,7 @@ import SubmitComplaint from './pages/SubmitComplaint';
 import MyComplaints from './pages/MyComplaints';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import ManageComplaints from './pages/ManageComplaints';
 import OfficerDashboard from './pages/OfficerDashboard';
 import SocketTest from './pages/SocketTest';
 import SimpleSocketTest from './pages/SimpleSocketTest';
@@ -78,16 +79,24 @@ function AppContent() {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/admin" 
+            <Route
+              path="/admin"
               element={
                 <ProtectedRoute allowedRoles={['admin']}>
                   <AdminDashboard />
                 </ProtectedRoute>
-              } 
+              }
             />
-            <Route 
-              path="/officer" 
+            <Route
+              path="/admin/complaints"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <ManageComplaints />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/officer"
               element={
                 <ProtectedRoute allowedRoles={['officer']}>
                   <OfficerDashboard />

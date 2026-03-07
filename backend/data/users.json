@@ -20,7 +20,8 @@
     "email": "officer@civiccrm.gov",
     "role": "officer",
     "phone": "2222222222",
-    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O"
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 1
   },
   {
     "id": 4,
@@ -47,7 +48,8 @@
     "phone": "1234891392",
     "password": "$2a$10$CLxrKLQYUS6pcb1xju88Y.GjMHw3wTQuskS8xnqn6055vEfgD1b5i",
     "role": "officer",
-    "createdAt": "2026-03-07T02:38:06.955Z"
+    "createdAt": "2026-03-07T02:38:06.955Z",
+    "departmentId": 2
   },
   {
     "id": 7,
@@ -101,7 +103,8 @@
     "phone": "7232732267",
     "password": "$2a$10$V1Nz2Zgjc3mj/qLvrhQNKOe./pBUll5vR40D/XgqpzpEZ7lZ7SreO",
     "role": "officer",
-    "createdAt": "2026-03-07T07:32:24.634Z"
+    "createdAt": "2026-03-07T07:32:24.634Z",
+    "departmentId": 3
   },
   {
     "id": 13,
@@ -137,6 +140,87 @@
     "phone": "+1234567892",
     "password": "$2a$10$wIEcy8plVPhbbpy6sQymu.ZGEPm4sfdVDbsv7yPlco6viiSPS4g0y",
     "role": "officer",
-    "createdAt": "2026-03-07T09:23:24.254Z"
+    "createdAt": "2026-03-07T09:23:24.254Z",
+    "departmentId": 1
+  },
+  {
+    "id": 17,
+    "fullName": "Officer Roads 2",
+    "email": "officer.2.2@civiccrm.gov",
+    "role": "officer",
+    "phone": "900669586",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 2,
+    "createdAt": "2026-03-07T11:04:30.060Z"
+  },
+  {
+    "id": 18,
+    "fullName": "Officer Sanitation 2",
+    "email": "officer.3.2@civiccrm.gov",
+    "role": "officer",
+    "phone": "900234048",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 3,
+    "createdAt": "2026-03-07T11:04:30.061Z"
+  },
+  {
+    "id": 19,
+    "fullName": "Officer Electricity 1",
+    "email": "officer.4.1@civiccrm.gov",
+    "role": "officer",
+    "phone": "900068371",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 4,
+    "createdAt": "2026-03-07T11:04:30.061Z"
+  },
+  {
+    "id": 20,
+    "fullName": "Officer Electricity 2",
+    "email": "officer.4.2@civiccrm.gov",
+    "role": "officer",
+    "phone": "900793700",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 4,
+    "createdAt": "2026-03-07T11:04:30.061Z"
+  },
+  {
+    "id": 21,
+    "fullName": "Officer Lighting 1",
+    "email": "officer.5.1@civiccrm.gov",
+    "role": "officer",
+    "phone": "900727797",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 5,
+    "createdAt": "2026-03-07T11:04:30.061Z"
+  },
+  {
+    "id": 22,
+    "fullName": "Officer Lighting 2",
+    "email": "officer.5.2@civiccrm.gov",
+    "role": "officer",
+    "phone": "900582496",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 5,
+    "createdAt": "2026-03-07T11:04:30.061Z"
+  },
+  {
+    "id": 23,
+    "fullName": "Officer Drainage 1",
+    "email": "officer.6.1@civiccrm.gov",
+    "role": "officer",
+    "phone": "900755990",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 6,
+    "createdAt": "2026-03-07T11:04:30.061Z"
+  },
+  {
+    "id": 24,
+    "fullName": "Officer Drainage 2",
+    "email": "officer.6.2@civiccrm.gov",
+    "role": "officer",
+    "phone": "900744547",
+    "password": "$2a$10$Sh06K/zfmgOYap6OOD65UuVkmpuuIZF/KUa1S5i0bjanRl1oPdf.O",
+    "departmentId": 6,
+    "createdAt": "2026-03-07T11:04:30.061Z"
   }
 ]
