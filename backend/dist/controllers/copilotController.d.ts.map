@@ -1,0 +1,1 @@
+{"version":3,"file":"copilotController.d.ts","sourceRoot":"","sources":["../../src/controllers/copilotController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AA2H5C,QAAA,MAAM,kBAAkB,GAAI,KAAK,OAAO,EAAE,KAAK,QAAQ,EAAE,MAAM,GAAG,SAmBjE,CAAC;AAGF,eAAO,MAAM,kBAAkB,GAAU,KAAK,OAAO,EAAE,KAAK,QAAQ,4DAkDnE,CAAC;AAGF,OAAO,EAAE,kBAAkB,EAAE,CAAC"}

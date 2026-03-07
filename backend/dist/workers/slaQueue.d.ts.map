@@ -1,0 +1,1 @@
+{"version":3,"file":"slaQueue.d.ts","sourceRoot":"","sources":["../../src/workers/slaQueue.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,QAAQ,CAAC;AAG/B,MAAM,WAAW,UAAU;IACzB,WAAW,EAAE,MAAM,CAAC;IACpB,gBAAgB,EAAE,MAAM,CAAC;IACzB,eAAe,EAAE,MAAM,CAAC;CACzB;AAGD,eAAO,MAAM,QAAQ,yDAWnB,CAAC;AAEH,eAAe,QAAQ,CAAC"}

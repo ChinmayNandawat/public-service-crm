@@ -31,7 +31,7 @@
       "category": "General",
       "sentiment": "neutral",
       "priorityScore": 0.3,
-      "status": "submitted",
+      "status": "in_progress",
       "assignedOfficer": 12,
       "attachments": null,
       "createdAt": "2026-03-07T05:36:27.478Z",
@@ -558,11 +558,11 @@
       "severity": "high",
       "sentiment": "negative",
       "priorityScore": 60,
-      "status": "in_progress",
+      "status": "resolved",
       "assignedOfficer": 12,
       "createdAt": "2026-02-28T11:04:30.061Z",
       "updatedAt": "2026-03-07T11:04:30.061Z",
-      "resolvedAt": null
+      "resolvedAt": "2026-03-07T12:43:12.634Z"
     },
     {
       "id": 46,
