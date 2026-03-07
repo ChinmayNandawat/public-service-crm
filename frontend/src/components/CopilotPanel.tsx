@@ -96,52 +96,59 @@ const CopilotPanel: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">AI Governance Copilot</h2>
-        <p className="text-gray-600">Ask questions about municipal data and get AI-powered insights</p>
+    <div className="max-w-4xl mx-auto p-6 bg-slate-900/40 border border-slate-800 rounded-3xl backdrop-blur-sm shadow-2xl">
+      <div className="mb-8">
+        <h2 className="text-3xl font-bold text-slate-50 mb-2 tracking-tight">AI Governance Copilot</h2>
+        <p className="text-slate-400">Ask questions about municipal data and get advanced insights</p>
         
-        {response?.llmEnabled && (
-          <div className="mt-2 p-2 bg-green-50 border border-green-200 rounded text-sm text-green-800">
-            ✅ AI Assistant is enabled (Gemini API)
-          </div>
-        )}
-        
-        {response && !response.llmEnabled && (
-          <div className="mt-2 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
-            ⚠️ AI Assistant using fallback analysis (LLM disabled)
-          </div>
-        )}
+        <div className="mt-4 flex flex-col gap-2">
+          {response?.llmEnabled && (
+            <div className="inline-flex items-center px-3 py-1 bg-cyan-950/30 border border-cyan-800/50 rounded-full text-xs font-medium text-cyan-400">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 mr-2 animate-pulse"></span>
+              Neural Network Active (Gemini API)
+            </div>
+          )}
+          
+          {response && !response.llmEnabled && (
+            <div className="inline-flex items-center px-3 py-1 bg-amber-950/30 border border-amber-800/50 rounded-full text-xs font-medium text-amber-400">
+              <span className="w-2 h-2 rounded-full bg-amber-400 mr-2"></span>
+              Fallback Analysis Mode Active
+            </div>
+          )}
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+      <form onSubmit={handleSubmit} className="space-y-6 mb-8">
         <div>
-          <label htmlFor="question" className="block text-sm font-medium text-gray-700 mb-2">
-            Question
+          <label htmlFor="question" className="block text-sm font-medium text-slate-400 mb-2 ml-4">
+            Command Prompt
           </label>
-          <textarea
-            id="question"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Ask about municipal data, trends, performance, etc..."
-            required
-          />
+          <div className="relative group">
+            <textarea
+              id="question"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              rows={3}
+              className="w-full px-6 py-4 bg-slate-950 border border-slate-700 rounded-3xl text-slate-50 placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none shadow-inner"
+              placeholder="Query municipal data, trends, performance metrics..."
+              required
+            />
+            <div className="absolute inset-0 rounded-3xl bg-cyan-400/5 opacity-0 group-focus-within:opacity-100 pointer-events-none transition-opacity"></div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="p-5 bg-slate-950/30 border border-slate-800/50 rounded-2xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label htmlFor="ward" className="block text-sm font-medium text-gray-700 mb-1">
-              Ward (Optional)
+            <label htmlFor="ward" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              Sector
             </label>
             <select
               id="ward"
               value={wardId}
               onChange={(e) => setWardId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 appearance-none"
             >
-              <option value="">All Wards</option>
+              <option value="">All Sectors</option>
               {wards.map((ward) => (
                 <option key={ward.id} value={ward.id}>
                   {ward.name}
@@ -151,16 +158,16 @@ const CopilotPanel: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-1">
-              Department (Optional)
+            <label htmlFor="department" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              Division
             </label>
             <select
               id="department"
               value={departmentId}
               onChange={(e) => setDepartmentId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 appearance-none"
             >
-              <option value="">All Departments</option>
+              <option value="">All Divisions</option>
               {departments.map((dept) => (
                 <option key={dept.id} value={dept.id}>
                   {dept.name}
@@ -170,62 +177,62 @@ const CopilotPanel: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="dateFrom" className="block text-sm font-medium text-gray-700 mb-1">
-              Date From (Optional)
+            <label htmlFor="dateFrom" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              Start Epoch
             </label>
             <input
               type="date"
               id="dateFrom"
               value={dateFrom}
               onChange={(e) => setDateFrom(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 [color-scheme:dark]"
             />
           </div>
 
           <div>
-            <label htmlFor="dateTo" className="block text-sm font-medium text-gray-700 mb-1">
-              Date To (Optional)
+            <label htmlFor="dateTo" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              End Epoch
             </label>
             <input
               type="date"
               id="dateTo"
               value={dateTo}
               onChange={(e) => setDateTo(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-slate-200 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 [color-scheme:dark]"
             />
           </div>
         </div>
 
-        <div className="flex space-x-3">
+        <div className="flex space-x-4">
           <button
             type="submit"
             disabled={isLoading || !question.trim()}
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 bg-cyan-500 text-slate-950 font-bold px-8 py-3 rounded-full hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]"
           >
-            {isLoading ? 'Analyzing...' : 'Get Insights'}
+            {isLoading ? 'Processing Query...' : 'Execute Analysis'}
           </button>
           
           <button
             type="button"
             onClick={clearForm}
-            className="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            className="px-8 py-3 bg-slate-800 text-slate-300 font-semibold rounded-full hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-slate-900 transition-colors border border-slate-700"
           >
-            Clear
+            Reset
           </button>
         </div>
       </form>
 
-      {/* Sample Questions */}
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">Try Sample Questions:</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      {/* Suggested Queries */}
+      <div className="mb-8 p-6 bg-slate-950/40 border border-slate-800 rounded-3xl">
+        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4">Suggested Protocols</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {sampleQuestions.map((sampleQuestion, index) => (
             <button
               key={index}
               onClick={() => handleSampleQuestion(sampleQuestion)}
-              className="text-left p-2 text-sm bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded text-blue-600 hover:text-blue-800"
+              className="text-left px-4 py-3 text-sm bg-slate-900/60 hover:bg-slate-800 border border-slate-700/50 rounded-xl text-cyan-400 hover:text-cyan-300 transition-all hover:border-cyan-800 group"
             >
-              {sampleQuestion}
+              <span className="text-slate-600 mr-2 group-hover:text-cyan-600">&gt;</span> {sampleQuestion}
             </button>
           ))}
         </div>
@@ -233,60 +240,95 @@ const CopilotPanel: React.FC = () => {
 
       {/* Error Display */}
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md">
-          <p className="text-red-800">{error}</p>
+        <div className="mb-8 p-5 bg-red-950/30 border border-red-900/50 rounded-2xl">
+          <div className="flex items-center">
+            <span className="text-red-500 mr-3">⚠️</span>
+            <p className="text-red-400 text-sm font-medium">{error}</p>
+          </div>
         </div>
       )}
 
       {/* Loading State */}
       {isLoading && (
-        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
-          <div className="flex items-center">
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-2"></div>
-            <p className="text-blue-800">Analyzing municipal data...</p>
+        <div className="mb-8 p-8 flex flex-col items-center justify-center space-y-4">
+          <div className="relative">
+            <div className="absolute inset-0 border-4 border-cyan-500/20 rounded-full blur-sm"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-400"></div>
           </div>
+          <p className="text-cyan-400 font-medium tracking-widest uppercase text-sm animate-pulse">Synthesizing Data...</p>
         </div>
       )}
 
-      {/* Response Display */}
+      {/* Response Display - Bento Grid */}
       {response && !isLoading && (
-        <div className="space-y-6">
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-md">
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">Analysis</h3>
-            <p className="text-blue-800 whitespace-pre-wrap">{response.analysis}</p>
-            <div className="mt-2 text-sm text-blue-600">
-              Source: {response.source === 'llm' ? 'AI Analysis' : 'Rule-based Analysis'} | 
-              Data Context: {response.dataContext.totalComplaints} complaints | 
-              Scope: {response.dataContext.analysisScope}
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div className="md:col-span-3 p-6 bg-slate-950/50 border border-slate-800/80 rounded-3xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 flex items-center">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span> Executive Summary
+            </h3>
+            <p className="text-slate-200 whitespace-pre-wrap leading-relaxed font-light text-lg">{response.analysis}</p>
           </div>
 
-          {response.recommendations.length > 0 && (
-            <div className="p-4 bg-green-50 border border-green-200 rounded-md">
-              <h3 className="text-lg font-semibold text-green-900 mb-2">Recommendations</h3>
-              <ul className="list-disc list-inside space-y-1">
+          <div className="md:col-span-2 p-6 bg-slate-900/60 border border-slate-800/60 rounded-3xl backdrop-blur-sm">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Strategic Directives</h3>
+            {response.recommendations.length > 0 ? (
+              <ul className="space-y-3">
                 {response.recommendations.map((rec, index) => (
-                  <li key={index} className="text-green-800">{rec}</li>
+                  <li key={index} className="flex items-start">
+                    <span className="text-cyan-500 font-bold mr-3 mt-0.5 opacity-70">0{index + 1}</span>
+                    <span className="text-slate-300">{rec}</span>
+                  </li>
                 ))}
               </ul>
-            </div>
-          )}
+            ) : (
+              <p className="text-slate-500 italic text-sm">No specific directives generated.</p>
+            )}
+          </div>
 
-          {response.citations.length > 0 && (
-            <div className="p-4 bg-gray-50 border border-gray-200 rounded-md">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Data Sources</h3>
-              <div className="flex flex-wrap gap-2">
-                {response.citations.map((citation, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 bg-gray-200 text-gray-700 rounded text-sm"
-                  >
-                    {citation}
-                  </span>
-                ))}
+          <div className="md:col-span-1 space-y-6 flex flex-col">
+            <div className="p-6 bg-slate-900/60 border border-slate-800/60 rounded-3xl flex-1 backdrop-blur-sm">
+              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Telemetry</h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="text-xs text-slate-500 mb-1">Total Signals</div>
+                  <div className="text-3xl font-bold text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">
+                    {response.dataContext.totalComplaints}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 mb-1">Engine Type</div>
+                  <div className="text-sm font-medium text-slate-300 bg-slate-800/50 px-3 py-1.5 rounded-lg inline-block border border-slate-700">
+                    {response.source === 'llm' ? 'Neural Subsystem' : 'Fallback Ruleset'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 mb-1">Analyzer Scope</div>
+                  <div className="text-sm text-slate-400 leading-tight">
+                    {response.dataContext.analysisScope || 'Global'}
+                  </div>
+                </div>
               </div>
             </div>
-          )}
+
+            {response.citations.length > 0 && (
+              <div className="p-6 bg-slate-900/60 border border-slate-800/60 rounded-3xl backdrop-blur-sm">
+                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Data Nodes</h3>
+                <div className="flex flex-wrap gap-2">
+                  {response.citations.map((citation, index) => (
+                    <span
+                      key={index}
+                      className="px-2.5 py-1 bg-slate-800/80 border border-slate-700 text-cyan-300/80 rounded-md text-xs font-mono"
+                    >
+                      {citation}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          
         </div>
       )}
     </div>

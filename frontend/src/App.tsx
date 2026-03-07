@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AuthProvider } from './hooks/useAuth';
+import { ThemeProvider } from './hooks/useTheme';
 import { ToastProvider } from './components/ToastNotifications';
 import Navbar from './components/Navbar';
 import OfflineBanner from './components/OfflineBanner';
@@ -21,9 +22,11 @@ function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Register service worker for PWA
+  // Register service worker for PWA (only in production)
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    // Check if we're not in development (fallback if Vite env types aren't loaded)
+    const isDev = process.env.NODE_ENV === 'development';
+    if (!isDev && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
           .then((registration) => {
@@ -37,13 +40,14 @@ function AppContent() {
   }, []);
 
   return (
-    <AuthProvider navigate={navigate} location={location}>
-      <ToastProvider>
-        <div className="min-h-screen bg-gray-50">
-          <OfflineBanner />
-          <Navbar />
-        <main>
-          <Routes>
+    <ThemeProvider>
+      <AuthProvider navigate={navigate} location={location}>
+        <ToastProvider>
+          <div className="min-h-screen w-full bg-slate-950 text-slate-50 font-sans selection:bg-cyan-500/30 overflow-x-hidden flex flex-col transition-colors duration-300">
+            <OfflineBanner />
+            <Navbar />
+            <main className="flex-1 flex flex-col">
+              <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -95,6 +99,7 @@ function AppContent() {
       </div>
       </ToastProvider>
     </AuthProvider>
+    </ThemeProvider>
   );
 }
 

@@ -37,7 +37,26 @@
       "createdAt": "2026-03-07T05:36:27.478Z",
       "assignedAt": null,
       "resolvedAt": null
+    },
+    {
+      "id": 3,
+      "citizenId": 11,
+      "wardId": 2,
+      "departmentId": 1,
+      "description": "water is bad",
+      "location": null,
+      "latitude": null,
+      "longitude": null,
+      "category": "Water Supply",
+      "sentiment": "neutral",
+      "priorityScore": 0.3,
+      "status": "submitted",
+      "assignedOfficer": null,
+      "attachments": null,
+      "createdAt": "2026-03-07T07:35:56.983Z",
+      "assignedAt": null,
+      "resolvedAt": null
     }
   ],
-  "nextId": 3
+  "nextId": 4
 }
