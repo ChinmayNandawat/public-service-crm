@@ -51,17 +51,17 @@ const PredictionsPanel: React.FC<{ onWardFilter?: (wardId: number) => void }> = 
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
-      case 'high': return 'text-red-600 bg-red-50';
-      case 'medium': return 'text-yellow-600 bg-yellow-50';
-      case 'low': return 'text-green-600 bg-green-50';
-      default: return 'text-gray-600 bg-gray-50';
+      case 'high': return 'text-rose-400 bg-rose-500/10 border border-rose-500/20';
+      case 'medium': return 'text-amber-400 bg-amber-500/10 border border-amber-500/20';
+      case 'low': return 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20';
+      default: return 'text-slate-400 bg-slate-800 border border-slate-700';
     }
   };
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'text-green-600';
-    if (confidence >= 0.6) return 'text-yellow-600';
-    return 'text-red-600';
+    if (confidence >= 0.8) return 'text-emerald-400';
+    if (confidence >= 0.6) return 'text-amber-400';
+    return 'text-rose-400';
   };
 
   const getTrendIcon = (trend: number) => {
@@ -82,11 +82,14 @@ const PredictionsPanel: React.FC<{ onWardFilter?: (wardId: number) => void }> = 
 
   if (isLoading) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Complaint Predictions</h3>
-        <div className="flex items-center justify-center py-8">
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mr-2"></div>
-          <span className="text-gray-600">Loading predictions...</span>
+      <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 backdrop-blur-sm">
+        <h3 className="text-xl font-bold text-slate-50 mb-4">Complaint Predictions</h3>
+        <div className="flex flex-col items-center justify-center py-12 space-y-4">
+          <div className="relative">
+            <div className="absolute inset-0 border-4 border-cyan-500/20 rounded-full blur-sm"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-400"></div>
+          </div>
+          <span className="text-cyan-400 text-sm font-medium tracking-widest uppercase">Loading Matrix...</span>
         </div>
       </div>
     );
@@ -94,9 +97,9 @@ const PredictionsPanel: React.FC<{ onWardFilter?: (wardId: number) => void }> = 
 
   if (error) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Complaint Predictions</h3>
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+      <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 backdrop-blur-sm">
+        <h3 className="text-xl font-bold text-slate-50 mb-4">Complaint Predictions</h3>
+        <div className="bg-rose-950/30 border border-rose-900/50 text-rose-400 px-4 py-3 rounded-2xl text-sm font-medium">
           {error}
         </div>
       </div>
@@ -105,103 +108,105 @@ const PredictionsPanel: React.FC<{ onWardFilter?: (wardId: number) => void }> = 
 
   if (!predictionsData || predictionsData.predictions.length === 0) {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Complaint Predictions</h3>
-        <div className="bg-gray-50 border border-gray-200 text-gray-700 px-4 py-3 rounded">
-          No predictions available. Insufficient historical data.
+      <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 backdrop-blur-sm">
+        <h3 className="text-xl font-bold text-slate-50 mb-4">Complaint Predictions</h3>
+        <div className="bg-slate-950/30 border border-slate-800 text-slate-400 px-4 py-3 rounded-2xl text-sm italic">
+          No predictions available. Insufficient telemetry data.
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold">Complaint Predictions</h3>
-        <div className="flex space-x-2">
+    <div className="bg-slate-900/40 border border-slate-800 rounded-3xl p-6 backdrop-blur-sm overflow-hidden relative">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative">
+        <h3 className="text-2xl font-bold text-slate-50 tracking-tight">Predictions Matrix</h3>
+        <div className="flex space-x-3 w-full md:w-auto">
           <select
             value={days}
             onChange={(e) => setDays(parseInt(e.target.value))}
-            className="px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 md:flex-none px-4 py-2 text-sm bg-slate-950 border border-slate-700 text-slate-50 rounded-xl focus:outline-none focus:ring-1 focus:ring-cyan-500 appearance-none shadow-inner"
           >
-            <option value={7}>7 Days</option>
-            <option value={14}>14 Days</option>
-            <option value={21}>21 Days</option>
-            <option value={30}>30 Days</option>
+            <option value={7} className="bg-slate-900 hover:bg-slate-800">7 Days</option>
+            <option value={14} className="bg-slate-900 hover:bg-slate-800">14 Days</option>
+            <option value={21} className="bg-slate-900 hover:bg-slate-800">21 Days</option>
+            <option value={30} className="bg-slate-900 hover:bg-slate-800">30 Days</option>
           </select>
           <select
             value={groupBy}
             onChange={(e) => setGroupBy(e.target.value as 'ward' | 'department')}
-            className="px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 md:flex-none px-4 py-2 text-sm bg-slate-950 border border-slate-700 text-slate-50 rounded-xl focus:outline-none focus:ring-1 focus:ring-cyan-500 appearance-none shadow-inner"
           >
-            <option value="ward">By Ward</option>
-            <option value="department">By Department</option>
+            <option value="ward" className="bg-slate-900 hover:bg-slate-800">By Sector</option>
+            <option value="department" className="bg-slate-900 hover:bg-slate-800">By Division</option>
           </select>
         </div>
       </div>
 
-      <div className="mb-4 text-sm text-gray-600">
-        <div className="flex justify-between">
-          <span>Algorithm: {predictionsData.metadata.algorithm}</span>
-          <span>Based on {predictionsData.metadata.totalComplaints} historical complaints</span>
+      <div className="mb-6 p-4 bg-slate-950/40 border border-slate-800/80 rounded-2xl relative">
+        <div className="flex justify-between text-xs font-mono uppercase tracking-wider text-slate-400">
+          <span>Engine: <span className="text-cyan-400">{predictionsData.metadata.algorithm}</span></span>
+          <span>Nodes: <span className="text-cyan-400">{predictionsData.metadata.totalComplaints}</span> metrics</span>
         </div>
-        <div className="text-xs text-gray-500 mt-1">
-          Generated: {new Date(predictionsData.metadata.generatedAt).toLocaleString()}
+        <div className="text-xs text-slate-600 mt-2 font-mono">
+          Snapshot: {new Date(predictionsData.metadata.generatedAt).toLocaleString()}
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950/20 mb-6">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b">
-              <th className="text-left py-2 px-2">
-                {groupBy === 'ward' ? 'Ward' : 'Department'}
+            <tr className="border-b border-slate-800 bg-slate-950/40 text-slate-400 uppercase text-xs tracking-wider">
+              <th className="text-left py-4 px-4 font-semibold">
+                {groupBy === 'ward' ? 'Sector' : 'Division'}
               </th>
-              <th className="text-right py-2 px-2">Predicted</th>
-              <th className="text-right py-2 px-2">Historical Avg</th>
-              <th className="text-center py-2 px-2">Trend</th>
-              <th className="text-center py-2 px-2">Risk</th>
-              <th className="text-center py-2 px-2">Confidence</th>
+              <th className="text-right py-4 px-4 font-semibold tracking-wider">Predicted</th>
+              <th className="text-right py-4 px-4 font-semibold tracking-wider">Historical Avg</th>
+              <th className="text-center py-4 px-4 font-semibold tracking-wider">Trend</th>
+              <th className="text-center py-4 px-4 font-semibold tracking-wider">Risk Level</th>
+              <th className="text-center py-4 px-4 font-semibold tracking-wider">Confidence</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-800">
             {predictionsData.predictions.map((prediction, index) => (
               <tr 
                 key={index} 
-                className={`border-b hover:bg-gray-50 ${prediction.wardId ? 'cursor-pointer' : ''}`}
+                className={`group hover:bg-slate-800/40 transition-colors ${prediction.wardId ? 'cursor-pointer' : ''}`}
                 onClick={() => prediction.wardId && handleWardClick(prediction.wardId!)}
               >
-                <td className="py-2 px-2 font-medium">
+                <td className="py-4 px-4 font-medium text-slate-200 group-hover:text-cyan-400 transition-colors">
                   {prediction.wardName || prediction.departmentName}
                 </td>
-                <td className="text-right py-2 px-2">
-                  <span className="font-semibold">{prediction.predictedComplaints}</span>
+                <td className="text-right py-4 px-4">
+                  <span className="font-bold text-slate-50 text-lg">{prediction.predictedComplaints}</span>
                 </td>
-                <td className="text-right py-2 px-2 text-gray-600">
+                <td className="text-right py-4 px-4 text-slate-500 font-mono">
                   {prediction.historicalAverage.toFixed(1)}
                 </td>
-                <td className="text-center py-2 px-2">
-                  <div className="flex items-center justify-center">
-                    <span className="mr-1">{getTrendIcon(prediction.trend)}</span>
-                    <span className={prediction.trend > 0.01 ? 'text-red-600' : prediction.trend < -0.01 ? 'text-green-600' : 'text-gray-600'}>
+                <td className="text-center py-4 px-4">
+                  <div className="flex items-center justify-center font-mono">
+                    <span className="mr-2 text-sm">{getTrendIcon(prediction.trend)}</span>
+                    <span className={prediction.trend > 0.01 ? 'text-rose-400' : prediction.trend < -0.01 ? 'text-emerald-400' : 'text-slate-500'}>
                       {formatPercentage(Math.abs(prediction.trend))}
                     </span>
                   </div>
                 </td>
-                <td className="text-center py-2 px-2">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${getRiskColor(prediction.risk)}`}>
-                    {prediction.risk.toUpperCase()}
+                <td className="text-center py-4 px-4">
+                  <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest shadow-sm ${getRiskColor(prediction.risk)}`}>
+                    {prediction.risk}
                   </span>
                 </td>
-                <td className="text-center py-2 px-2">
+                <td className="text-center py-4 px-4">
                   <div className="flex items-center justify-center">
-                    <div className="w-8 bg-gray-200 rounded-full h-2 mr-1">
+                    <div className="w-16 bg-slate-800 rounded-full h-1.5 mr-3 overflow-hidden border border-slate-700/50">
                       <div 
-                        className="bg-blue-600 h-2 rounded-full" 
+                        className="bg-cyan-500 h-full rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)]" 
                         style={{ width: `${prediction.confidence * 100}%` }}
                       ></div>
                     </div>
-                    <span className={`text-xs font-medium ${getConfidenceColor(prediction.confidence)}`}>
+                    <span className={`text-xs font-mono font-bold ${getConfidenceColor(prediction.confidence)}`}>
                       {formatPercentage(prediction.confidence)}
                     </span>
                   </div>
@@ -213,39 +218,41 @@ const PredictionsPanel: React.FC<{ onWardFilter?: (wardId: number) => void }> = 
       </div>
 
       {predictionsData.predictions.some(p => p.wardId) && (
-        <div className="mt-4 text-xs text-gray-500 text-center">
-          Click on a ward row to filter the heatmap
+        <div className="mb-6 text-xs text-slate-500 text-center uppercase tracking-widest font-mono">
+          &lt; Select a sector to cross-reference coordinates &gt;
         </div>
       )}
 
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-        <div className="bg-gray-50 p-3 rounded">
-          <div className="font-medium text-gray-700 mb-1">Risk Levels</div>
-          <div className="space-y-1">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-inner">
+          <div className="font-bold text-slate-400 uppercase tracking-widest mb-3 text-[10px]">Risk Indicators</div>
+          <div className="space-y-2.5">
             <div className="flex items-center">
-              <span className="w-3 h-3 bg-red-100 text-red-600 rounded text-xs mr-2">H</span>
-              <span>High: &gt;50% above average</span>
+              <span className="flex items-center justify-center w-5 h-5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded text-[10px] font-bold mr-3 shadow-inner">H</span>
+              <span className="text-slate-300 font-medium">Critical: &gt;50% variance</span>
             </div>
             <div className="flex items-center">
-              <span className="w-3 h-3 bg-yellow-100 text-yellow-600 rounded text-xs mr-2">M</span>
-              <span>Medium: 20-50% above average</span>
+              <span className="flex items-center justify-center w-5 h-5 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded text-[10px] font-bold mr-3 shadow-inner">M</span>
+              <span className="text-slate-300 font-medium">Elevated: 20-50% variance</span>
             </div>
             <div className="flex items-center">
-              <span className="w-3 h-3 bg-green-100 text-green-600 rounded text-xs mr-2">L</span>
-              <span>Low: &lt;20% above average</span>
+              <span className="flex items-center justify-center w-5 h-5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded text-[10px] font-bold mr-3 shadow-inner">L</span>
+              <span className="text-slate-300 font-medium">Stable: &lt;20% variance</span>
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 p-3 rounded">
-          <div className="font-medium text-gray-700 mb-1">Algorithm</div>
-          <div className="text-gray-600">
-            Rolling average + linear trend analysis on historical complaint patterns
+        
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-inner">
+          <div className="font-bold text-slate-400 uppercase tracking-widest mb-2 text-[10px]">Processing Model</div>
+          <div className="text-slate-300 leading-relaxed font-medium">
+            Applying rolling average coupled with linear regression mapping over temporal complaint matrices.
           </div>
         </div>
-        <div className="bg-gray-50 p-3 rounded">
-          <div className="font-medium text-gray-700 mb-1">Confidence</div>
-          <div className="text-gray-600">
-            Based on data consistency and historical data volume
+        
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-inner">
+          <div className="font-bold text-slate-400 uppercase tracking-widest mb-2 text-[10px]">Confidence Metrics</div>
+          <div className="text-slate-300 leading-relaxed font-medium">
+            Weighting index derived from timeline consistency markers and structural data density.
           </div>
         </div>
       </div>
