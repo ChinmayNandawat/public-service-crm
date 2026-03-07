@@ -120,21 +120,21 @@ const TransparencyPortal: React.FC = () => {
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Public Transparency Portal</h1>
-              <p className="text-gray-600 mt-1">Aggregated complaint metrics and performance indicators</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Public Transparency Portal</h1>
+              <p className="text-gray-600 mt-1 text-sm sm:text-base">Aggregated complaint metrics and performance indicators</p>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
               <button
                 onClick={fetchData}
-                className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm sm:text-base"
               >
                 🔄 Refresh
               </button>
               <button
                 onClick={downloadCSV}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm sm:text-base"
               >
                 📊 Download CSV
               </button>
@@ -151,87 +151,106 @@ const TransparencyPortal: React.FC = () => {
         </div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
             <div className="flex items-center">
-              <div className="p-3 bg-blue-100 rounded-full">
-                <div className="text-blue-600 text-2xl">📋</div>
+              <div className="p-2 sm:p-3 bg-blue-100 rounded-full">
+                <div className="text-blue-600 text-xl sm:text-2xl">📋</div>
               </div>
-              <div className="ml-4">
-                <h3 className="text-sm font-medium text-gray-500">Total Complaints</h3>
-                <p className="text-2xl font-bold text-gray-900">{formatNumber(data.totalComplaints)}</p>
+              <div className="ml-3 sm:ml-4">
+                <h3 className="text-xs sm:text-sm font-medium text-gray-500">Total Complaints</h3>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatNumber(data.totalComplaints)}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
             <div className="flex items-center">
-              <div className="p-3 bg-green-100 rounded-full">
-                <div className="text-green-600 text-2xl">✅</div>
+              <div className="p-2 sm:p-3 bg-green-100 rounded-full">
+                <div className="text-green-600 text-xl sm:text-2xl">✅</div>
               </div>
-              <div className="ml-4">
-                <h3 className="text-sm font-medium text-gray-500">Resolution Rate</h3>
-                <p className="text-2xl font-bold text-gray-900">{formatPercentage(data.resolvedRatio)}</p>
+              <div className="ml-3 sm:ml-4">
+                <h3 className="text-xs sm:text-sm font-medium text-gray-500">Resolution Rate</h3>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatPercentage(data.resolvedRatio)}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
             <div className="flex items-center">
-              <div className="p-3 bg-yellow-100 rounded-full">
-                <div className="text-yellow-600 text-2xl">⏱️</div>
+              <div className="p-2 sm:p-3 bg-yellow-100 rounded-full">
+                <div className="text-yellow-600 text-xl sm:text-2xl">⏱️</div>
               </div>
-              <div className="ml-4">
-                <h3 className="text-sm font-medium text-gray-500">Avg Resolution Time</h3>
-                <p className="text-2xl font-bold text-gray-900">{formatHours(data.avgResolutionTimeHours)}</p>
+              <div className="ml-3 sm:ml-4">
+                <h3 className="text-xs sm:text-sm font-medium text-gray-500">Avg Resolution Time</h3>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatHours(data.avgResolutionTimeHours)}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 mb-8">
           {/* Top Issues Chart */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Top Issues by Department</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={data.topIssues}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis 
-                  dataKey="department" 
-                  angle={-45}
-                  textAnchor="end"
-                  height={80}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="count" fill="#3b82f6" />
-              </BarChart>
-            </ResponsiveContainer>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Top Issues by Department</h2>
+            {data.topIssues && data.topIssues.length > 0 ? (
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={data.topIssues}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis 
+                    dataKey="department" 
+                    angle={-45}
+                    textAnchor="end"
+                    height={60}
+                    fontSize={12}
+                  />
+                  <YAxis fontSize={12} />
+                  <Tooltip />
+                  <Bar dataKey="count" fill="#3b82f6" />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-64 flex items-center justify-center text-gray-500">
+                <div className="text-center">
+                  <div className="text-4xl mb-2">📊</div>
+                  <p>No department data available</p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Complaints by Ward Chart */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Complaints by Ward</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={data.complaintsByWard}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={(entry: any) => `${entry.wardName}: ${((entry.count / data.totalComplaints) * 100).toFixed(0)}%`}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="count"
-                >
-                  {data.complaintsByWard.map((_, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Complaints by Ward</h2>
+            {data.complaintsByWard && data.complaintsByWard.length > 0 ? (
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie
+                    data={data.complaintsByWard}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(entry: any) => `${entry.wardName}: ${((entry.count / data.totalComplaints) * 100).toFixed(0)}%`}
+                    outerRadius={60}
+                    fill="#8884d8"
+                    dataKey="count"
+                  >
+                    {data.complaintsByWard.map((_, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-64 flex items-center justify-center text-gray-500">
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🗺️</div>
+                  <p>No ward data available</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -241,98 +260,97 @@ const TransparencyPortal: React.FC = () => {
         </div>
 
         {/* Data Tables */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
           {/* Top Issues Table */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Department Breakdown</h2>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Department Breakdown</h2>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Department
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Count
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Percentage
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {data.topIssues.map((issue, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {issue.department}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatNumber(issue.count)}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatPercentage((issue.count / data.totalComplaints) * 100)}
+                  {data.topIssues && data.topIssues.length > 0 ? (
+                    data.topIssues.map((issue, index) => (
+                      <tr key={index}>
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                          {issue.department}
+                        </td>
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                          {formatNumber(issue.count)}
+                        </td>
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                          {formatPercentage((issue.count / data.totalComplaints) * 100)}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={3} className="px-6 py-8 text-center text-gray-500">
+                        <div className="text-4xl mb-2">📊</div>
+                        <p>No department data available</p>
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
           </div>
 
           {/* Ward Breakdown Table */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Ward Breakdown</h2>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Ward Breakdown</h2>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Ward
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Count
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Percentage
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {data.complaintsByWard.map((ward, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {ward.wardName}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatNumber(ward.count)}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {formatPercentage((ward.count / data.totalComplaints) * 100)}
+                  {data.complaintsByWard && data.complaintsByWard.length > 0 ? (
+                    data.complaintsByWard.map((ward, index) => (
+                      <tr key={index}>
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                          {ward.wardName}
+                        </td>
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                          {formatNumber(ward.count)}
+                        </td>
+                        <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                          {formatPercentage((ward.count / data.totalComplaints) * 100)}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={3} className="px-6 py-8 text-center text-gray-500">
+                        <div className="text-4xl mb-2">🗺️</div>
+                        <p>No ward data available</p>
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-
-        {/* Accessibility Summary */}
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-blue-900 mb-4">📊 Data Summary</h2>
-          <div className="text-blue-800 space-y-2">
-            <p><strong>Total Performance:</strong> {formatNumber(data.totalComplaints)} complaints processed with {formatPercentage(data.resolvedRatio)} resolution rate.</p>
-            <p><strong>Efficiency:</strong> Average resolution time of {formatHours(data.avgResolutionTimeHours)} per complaint.</p>
-            <p><strong>Top Department:</strong> {data.topIssues[0]?.department || 'N/A'} with {formatNumber(data.topIssues[0]?.count || 0)} complaints.</p>
-            <p><strong>Most Active Ward:</strong> {data.complaintsByWard[0]?.wardName || 'N/A'} with {formatNumber(data.complaintsByWard[0]?.count || 0)} complaints.</p>
-          </div>
-          <div className="mt-4">
-            <button
-              onClick={downloadCSV}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              📥 Download Full Dataset (CSV)
-            </button>
           </div>
         </div>
       </div>
