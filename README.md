@@ -2,10 +2,13 @@
 
 A comprehensive CRM system for managing public service complaints and requests with intelligent duplicate detection, file uploads, and monitoring.
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Running via Docker)
+
+For a quick demonstration of the application, you can run everything inside Docker:
 
 ### 1. **Clone and navigate to project:**
 ```bash
+git clone <repository-url>
 cd smart-public-service-crm
 ```
 
@@ -19,6 +22,67 @@ docker compose up --build
 - **Backend API**: http://localhost:5001
 - **Database**: localhost:5433 (PostgreSQL)
 - **Redis**: localhost:6379
+- **MinIO (S3)**: http://localhost:9000
+
+## 🛠️ Local Development Setup (For Contributors)
+
+If you want to contribute to the codebase, follow these steps to run the Node.js applications natively with hot-reloading, while using Docker for backing services.
+
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [Docker](https://www.docker.com/products/docker-desktop) and Docker Compose
+- Git
+
+### 2. Clone the repository
+```bash
+git clone <repository-url>
+cd smart-public-service-crm
+```
+
+### 3. Start Backing Services
+Start PostgreSQL, Redis, and MinIO in the background:
+```bash
+docker compose up postgres redis minio -d
+```
+
+### 4. Setup Backend
+```bash
+cd backend
+
+# Install dependencies
+npm install
+
+# Run database migrations
+DATABASE_URL="postgresql://postgres:postgres@localhost:5433/civiccrm" npx prisma migrate dev --name init
+
+# Generate Prisma Client
+DATABASE_URL="postgresql://postgres:postgres@localhost:5433/civiccrm" npx prisma generate
+
+# Seed the database (generates default admin/officer accounts)
+PGPASSWORD=postgres psql -h localhost -p 5433 -U postgres -d civiccrm -f prisma/seed.sql
+
+# Start the development server
+npm run dev
+```
+*The backend will be available at http://localhost:5000*
+
+### 5. Setup Frontend
+Open a new terminal window:
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+*The frontend will be available at http://localhost:5173*
+
+### Default Login Credentials
+- **Admin**: admin@civiccrm.gov / admin123
+- **Officer**: officer@civiccrm.gov / officer123
+- **Citizen**: citizen@example.com / citizen123
 
 ## 📋 Available Endpoints
 
