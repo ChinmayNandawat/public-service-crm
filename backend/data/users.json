@@ -75,5 +75,41 @@
     "password": "admin123",
     "role": "admin",
     "createdAt": "2026-03-07T03:30:00.000Z"
+  },
+  {
+    "id": 10,
+    "fullName": "Test",
+    "email": "test1@test.com",
+    "phone": "123",
+    "password": "$2a$10$qYa9k2iwUYG7Rl2POBlta.ypU53B.ttZa3RBNlu8WnjUBte6Y/NyG",
+    "role": "citizen",
+    "createdAt": "2026-03-07T07:27:15.659Z"
+  },
+  {
+    "id": 11,
+    "fullName": "citi",
+    "email": "citi@gmail.com",
+    "phone": "7272727272",
+    "password": "$2a$10$J9L4gYIvcHVDwOi0Tdj.UOlkvHvzjdMNxOOZNwPUKVhfmfb3IaA7O",
+    "role": "citizen",
+    "createdAt": "2026-03-07T07:30:35.863Z"
+  },
+  {
+    "id": 12,
+    "fullName": "offi",
+    "email": "offi@gmail.com",
+    "phone": "7232732267",
+    "password": "$2a$10$V1Nz2Zgjc3mj/qLvrhQNKOe./pBUll5vR40D/XgqpzpEZ7lZ7SreO",
+    "role": "officer",
+    "createdAt": "2026-03-07T07:32:24.634Z"
+  },
+  {
+    "id": 13,
+    "fullName": "adm",
+    "email": "adm@gmail.com",
+    "phone": "2783920383",
+    "password": "$2a$10$I68rLowh7ZlC6xYhPrjqT.pQ.ZIUE3C5oHOKXgbbN9MI1loRfhvoO",
+    "role": "admin",
+    "createdAt": "2026-03-07T07:33:22.084Z"
   }
 ]
