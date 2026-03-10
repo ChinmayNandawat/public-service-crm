@@ -25,8 +25,8 @@ function AppContent() {
 
   // Register service worker for PWA (only in production)
   useEffect(() => {
-    // Check if we're not in development (fallback if Vite env types aren't loaded)
-    const isDev = process.env.NODE_ENV === 'development';
+      // Check if we're not in development
+      const isDev = import.meta.env.MODE === 'development';
     if (!isDev && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')

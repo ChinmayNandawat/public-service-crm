@@ -173,12 +173,12 @@ class SocketClientService {
   }
 
   // Fallback polling for when socket fails
-  private pollInterval: NodeJS.Timeout | null = null;
+  private pollInterval: number | null = null;
   private lastPollTime = 0;
 
   startPolling(callback: () => void, interval: number = 30000): void {
     this.stopPolling();
-    this.pollInterval = setInterval(() => {
+    this.pollInterval = window.setInterval(() => {
       if (!this.isConnected()) {
         callback();
         this.lastPollTime = Date.now();
