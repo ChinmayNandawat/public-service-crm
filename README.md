@@ -23,7 +23,8 @@ Smart Public Service CRM provides:
 - SLA monitoring & automated escalation (Redis + BullMQ)
 - Secure attachments (S3/MinIO presigned uploads)
 - Public transparency portal and AI Copilot for governance insights
-- ## ✨ Key Features
+
+## ✨ Key Features
 
 - **AI Complaint Classification** — Auto-categorize incoming complaints (category, urgency, sentiment).
 - **Priority Scoring Engine** — Compute a normalized priority score using urgency, sentiment, and location sensitivity.
@@ -39,7 +40,7 @@ Smart Public Service CRM provides:
 
 ---
 
-## 🏗️ Architecture (one-line)
+## 🏗️ Architecture 
 
 Modular backend (Express + TypeScript + Prisma) + AI layer + Redis workers + Socket.IO real-time layer + PostgreSQL + S3-compatible storage; React + Vite frontend (PWA) with Leaflet heatmap.
 
@@ -77,7 +78,7 @@ The system is organized into the following layers:
 
 This architecture provides scalability, fault isolation, and the ability to iterate on AI components independently.
 
-## 🎬 Demo Flow (what to show judges)
+## 🎬 Demo Flow 
 
 1. Login as Citizen → Submit a complaint with location and photo.
 2. AI classifies it (category, urgency) and computes priority score.
@@ -100,10 +101,6 @@ cd smart-public-service-crm
 
 # Start all services (build images)
 docker compose up --build
-
----
-
-# CHUNK 5 — Local development (native) & seed data
 
 ```md
 ## 🛠️ Local Development (native, hot-reload)
@@ -137,10 +134,6 @@ npm run dev
 cd backend
 npm run seed:demo
 
-
----
-
-# CHUNK 6 — Environment variables & .env.example (copy to repo)
 
 ```md
 ## ⚙️ Environment Variables
@@ -186,10 +179,6 @@ SENTRY_DSN=
 AI_SERVICE_API_KEY=dev-key
 
 
----
-
-# CHUNK 7 — API endpoints, frontend pages & testing
-
 ```md
 ## 📋 API Endpoints (selected)
 
@@ -228,7 +217,8 @@ AI_SERVICE_API_KEY=dev-key
 - **Unit tests**: backend services (priority util, aiService fallback)
 - **Integration tests**: endpoints for complaint creation & assignment
 - **E2E**: Cypress script for demo flow (register → submit → assign → resolve)
-- Run tests:
+
+Run tests:
 ```bash
 # Backend tests
 cd backend
@@ -238,10 +228,6 @@ npm test
 cd frontend
 npm test
 
-
----
-
-# CHUNK 8 — Deployment, monitoring, troubleshooting, contributing & license
 
 ```md
 ## 🚀 Deployment & CI/CD
@@ -316,3 +302,4 @@ If you want help running the project or need a live demo for the hackathon, ping
 ---
 
 > Thanks for using **Smart Public Service CRM** — built with civic tech, AI, and practical engineering to help governments deliver better public services.
+
