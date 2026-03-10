@@ -799,7 +799,26 @@
       "createdAt": "2026-03-07T17:19:49.582Z",
       "assignedAt": null,
       "resolvedAt": null
+    },
+    {
+      "id": 59,
+      "citizenId": 11,
+      "wardId": 2,
+      "departmentId": 2,
+      "description": "road pot holes",
+      "location": "rohini sector 17",
+      "latitude": null,
+      "longitude": null,
+      "category": "Road Damage",
+      "sentiment": "neutral",
+      "priorityScore": 0.3,
+      "status": "submitted",
+      "assignedOfficer": null,
+      "attachments": null,
+      "createdAt": "2026-03-10T10:57:46.728Z",
+      "assignedAt": null,
+      "resolvedAt": null
     }
   ],
-  "nextId": 59
+  "nextId": 60
 }
