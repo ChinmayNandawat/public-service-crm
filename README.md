@@ -296,8 +296,8 @@ This project is released under the **MIT License** — see `LICENSE`.
 
 If you want help running the project or need a live demo for the hackathon, ping the maintainer:
 
-- **Email**: your-email@example.com  
-- **Slack / WhatsApp**: +91-XXXXXXXXXX
+- **Email**: abhnish.1289@gmail.com
+- **Email**: dev24.chinmay@gmail.com
 
 ---
 
