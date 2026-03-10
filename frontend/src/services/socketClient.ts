@@ -29,7 +29,8 @@ class SocketClientService {
       }
 
       // Create new socket connection
-      const socketUrl = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5001';
+      const prodUrl = 'https://public-service-backend.onrender.com'; // REPLACE THIS LATER IF WRONG
+      const socketUrl = import.meta.env.MODE === 'production' ? prodUrl : 'http://localhost:5001';
       this.socket = io(socketUrl, {
         auth: { token },
         transports: ['websocket', 'polling'],

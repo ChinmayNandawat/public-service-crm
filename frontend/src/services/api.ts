@@ -2,7 +2,10 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 // API base configuration
 // Get API URL from env, fallback to localhost for development
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const RENDER_URL = 'https://public-service-backend.onrender.com'; // REPLACE THIS LATER IF WRONG
+const API_BASE_URL = import.meta.env.MODE === 'production' 
+  ? `${RENDER_URL}/api` 
+  : 'http://localhost:5001/api';
 
 // Types
 export interface User {
